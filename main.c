@@ -46,11 +46,16 @@ void delay_ms(unsigned int ms)
 		for(j=110;j>0;j--);
 }
 
-void delay_10us(unsigned int c)
+void display(unsigned int num)
 {
-	unsigned int a;
-	for(; c > 0; c--)
-		for(a = 2; a > 0; a--);
+	unsigned int offset = 7;
+	while (num > 0) {
+		select_ditgit(offset--);
+		P0 = segment_codes[num % 10];
+		num /= 10;
+		delay_ms(1);
+		P0 = 0x00;
+	}
 }
 
 void time0() __interrupt(1)
@@ -62,7 +67,7 @@ void time0() __interrupt(1)
 
 void time0_init()
 {
-	// set timer mode
+	// increase counter every 1ms
 	TMOD = 0x01;
 
 	// set initial value
@@ -106,6 +111,8 @@ int main()
 	// LED
 	P2 = 0xFF;		// 关闭所有LED
 
+	// counter = 3590000;
+
 	// 电机
 	start_motor();
 
@@ -114,6 +121,8 @@ int main()
 	unsigned long off_time_limit = 600;
 
 	time0_init();
+
+	// counter = 3550000;
 
 	int pressed = 0;
 	int sleep = 0;
