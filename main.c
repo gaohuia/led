@@ -86,18 +86,11 @@ void time0_init()
 
 void start_motor()
 {
-	// P1_0 = 0x01;
-	// P1_1 = 0x01;
-	// P1_2 = 0x01;
-
 	P2_7 = 0;
 }
 
 void stop_motor()
 {
-	// P1_0 = 0x00;
-	// P1_1 = 0x00;
-	// P1_2 = 0x00;
 	P2_7 = 1;
 }
 
@@ -111,8 +104,6 @@ int main()
 	// LED
 	P2 = 0xFF;		// 关闭所有LED
 
-	// counter = 3590000;
-
 	// 电机
 	start_motor();
 
@@ -121,8 +112,6 @@ int main()
 	unsigned long off_time_limit = 600;
 
 	time0_init();
-
-	// counter = 3550000;
 
 	int pressed = 0;
 	int sleep = 0;
