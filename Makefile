@@ -1,6 +1,9 @@
 
-build: main.c
-	sdcc -mmcs51 --model-small -p89 main.c
+build: main.c ired.c ired.h tools.c tools.h
+	sdcc -mmcs51 --model-small -p89 main.c -c -o main.rel
+	sdcc -mmcs51 --model-small -p89 ired.c -c -o ired.rel
+	sdcc -mmcs51 --model-small -p89 tools.c -c -o tools.rel
+	sdcc -mmcs51 --model-small -p89 main.rel ired.rel tools.rel -o main.ihx
 	packihx main.ihx > main.hex
 
 flash: build

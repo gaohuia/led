@@ -1,5 +1,8 @@
 
 #include <mcs51/8052.h>
+
+#include "tools.h"
+
 // #include <mcs51/stc89.h>
 // #include <mcs51/lint.h>
 
@@ -37,13 +40,6 @@ void select_ditgit(unsigned char i)
 	case 6: LSC=0;LSB=0;LSA=1;break;
 	case 7: LSC=0;LSB=0;LSA=0;break;
 	}
-}
-
-void delay_ms(unsigned int ms)
-{
-	unsigned int i,j;
-	for(i=ms;i>0;i--)
-		for(j=110;j>0;j--);
 }
 
 void display(unsigned int num)
